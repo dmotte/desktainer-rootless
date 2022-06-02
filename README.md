@@ -1,2 +1,7 @@
 # desktainer-rootless
-🖥 Remote desktop in a container (rootless version)
+
+:construction: **Work in progress** :construction:
+
+TODO
+
+This repo is still under construction. Come back soon :)
