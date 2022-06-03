@@ -4,7 +4,7 @@ set -e
 
 ############################ ENVIRONMENT VARIABLES #############################
 
-if [ -z $HOME ]; then
+if [ -z "$HOME" ]; then
     echo "The HOME environment variable is not set" 1>&2
 	exit 1
 fi
