@@ -44,6 +44,8 @@ rm -f /tmp/.X0-lock
 
 ################################ START SERVICES ################################
 
+trap 'kill $(jobs -p)' EXIT
+
 echo "Starting Xvfb"
 /usr/bin/Xvfb :0 -screen 0 "${RESOLUTION}x24" -nolisten tcp -nolisten unix &
 sleep 2
@@ -61,3 +63,4 @@ echo "Starting noVNC"
 /usr/bin/websockify --web=/usr/share/novnc "$NOVNC_PORT" "127.0.0.1:$VNC_PORT" &
 
 wait # until all jobs finish
+trap - EXIT
