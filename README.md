@@ -13,9 +13,15 @@
 
 ## Usage
 
-This image is meant to be extended. Take a look at [`test/Dockerfile`](test/Dockerfile) for an example.
-
 The simplest way to try this image is:
+
+```bash
+docker run -it --rm -p 6901:6901 dmotte/desktainer-rootless
+```
+
+But this way the container will run as root. To run it as a non-root user, this image has to be extended. Take a look at [`test/Dockerfile`](test/Dockerfile) for an example.
+
+So the simplest **sensible** way to try this image is:
 
 ```bash
 docker build -t dtrl-test test
@@ -41,7 +47,7 @@ docker run -it --rm -p 6901:6901 -h dtrl-test -u debian \
 
 ### Environment variables
 
-Same as the [dmotte/desktainer](https://github.com/dmotte/desktainer) project except that the `USER` and `PASSWORD` environment variables have no effect. This behaviour is intended, since the container is run as a non-root user.
+Same as the [dmotte/desktainer](https://github.com/dmotte/desktainer) project except that the `USER` and `PASSWORD` environment variables have no effect. This behaviour is intended, since the container should run as a non-root user.
 
 ## Development
 

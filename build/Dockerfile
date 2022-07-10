@@ -52,4 +52,8 @@ RUN rm /etc/xdg/autostart/light-locker.desktop
 RUN rm /etc/xdg/autostart/lxpolkit.desktop && \
     mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
 
+ENV USER=root HOME=/root
+
+WORKDIR /root
+
 ENTRYPOINT ["/startup.sh"]

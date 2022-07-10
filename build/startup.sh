@@ -4,11 +4,6 @@ set -e
 
 ############################ ENVIRONMENT VARIABLES #############################
 
-if [ -z "$HOME" ]; then
-    echo "The HOME environment variable is not set" 1>&2
-	exit 1
-fi
-
 VNC_PORT=${VNC_PORT:-5901}
 NOVNC_PORT=${NOVNC_PORT:-6901}
 RESOLUTION=${RESOLUTION:-1280x720}
