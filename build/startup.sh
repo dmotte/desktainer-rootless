@@ -6,7 +6,7 @@ set -e
 
 VNC_PORT=${VNC_PORT:-5901}
 NOVNC_PORT=${NOVNC_PORT:-6901}
-RESOLUTION=${RESOLUTION:-1280x720}
+RESOLUTION=${RESOLUTION:-1920x1080}
 
 ############################# VNC SERVER PASSWORD ##############################
 

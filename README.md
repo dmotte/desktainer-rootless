@@ -25,7 +25,7 @@ So the simplest **sensible** way to try this image is:
 
 ```bash
 docker build -t dtrl-test test
-docker run -it --rm -p 6901:6901 -u debian dtrl-test
+docker run -it --rm -p 6901:6901 -u mainuser dtrl-test
 ```
 
 Then head over to http://localhost:6901/ to access the remote desktop.
@@ -35,7 +35,7 @@ Then head over to http://localhost:6901/ to access the remote desktop.
 You can also use more advanced commands like this one:
 
 ```bash
-docker run -it --rm -p 6901:6901 -h dtrl-test -u debian \
+docker run -it --rm -p 6901:6901 -h dtrl-test -u mainuser \
     -v /etc/timezone:/etc/timezone:ro \
     -v /etc/localtime:/etc/localtime:ro \
     dtrl-test
