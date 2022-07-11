@@ -17,6 +17,9 @@ RUN apt-get update \
 COPY startup.sh /
 RUN chmod +x /startup.sh
 
+# Create the /opt/startup-early and /opt/startup-late directories
+RUN mkdir -p /opt/startup-early /opt/startup-late
+
 # locale: set UTF-8 locale as environment variable
 ENV LC_ALL C.UTF-8
 

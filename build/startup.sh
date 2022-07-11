@@ -8,6 +8,13 @@ VNC_PORT=${VNC_PORT:-5901}
 NOVNC_PORT=${NOVNC_PORT:-6901}
 RESOLUTION=${RESOLUTION:-1920x1080}
 
+################### INCLUDE SCRIPTS FROM /opt/startup-early ####################
+
+for i in /opt/startup-early/*.sh; do
+    [ -f "$i" ] || continue
+    source "$i"
+done
+
 ############################# VNC SERVER PASSWORD ##############################
 
 # If the VNC password should be set
@@ -36,6 +43,13 @@ fi
 
 # Remove the X11 lock file if present
 rm -f /tmp/.X0-lock
+
+#################### INCLUDE SCRIPTS FROM /opt/startup-late ####################
+
+for i in /opt/startup-late/*.sh; do
+    [ -f "$i" ] || continue
+    source "$i"
+done
 
 ################################ START SERVICES ################################
 
