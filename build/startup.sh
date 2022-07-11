@@ -12,6 +12,7 @@ RESOLUTION=${RESOLUTION:-1920x1080}
 
 for i in /opt/startup-early/*.sh; do
     [ -f "$i" ] || continue
+    # shellcheck source=/dev/null
     source "$i"
 done
 
@@ -48,6 +49,7 @@ rm -f /tmp/.X0-lock
 
 for i in /opt/startup-late/*.sh; do
     [ -f "$i" ] || continue
+    # shellcheck source=/dev/null
     source "$i"
 done
 
