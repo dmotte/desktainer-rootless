@@ -43,7 +43,7 @@ docker run -it --rm -p 6901:6901 -h dtrl-test -u mainuser \
 
 > :bulb: **Tip**: If you want to **change the resolution** while the container is running, you can use the `xrandr --fb 1024x768` command. The new resolution cannot be larger than the one specified in the `RESOLUTION` environment variable though.
 
-> :bulb: **Tip**: if you need to run commands at LXDE startup, you can create a launcher file in the `/etc/xdg/autostart` directory.
+> :bulb: **Tip**: if you need to run commands after the LXDE startup, you can create launcher files in the `/etc/xdg/autostart` or the `~/.config/autostart` directory.
 
 ### Environment variables
 
