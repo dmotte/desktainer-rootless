@@ -9,9 +9,7 @@
 
 > :package: This image is also on **Docker Hub** as [`dmotte/desktainer-rootless`](https://hub.docker.com/r/dmotte/desktainer-rootless) and runs on **several architectures** (e.g. amd64, arm64, ...). To see the full list of supported platforms, please refer to the [`.github/workflows/release.yml`](.github/workflows/release.yml) file. If you need an architecture which is currently unsupported, feel free to open an issue.
 
-> :calendar: The build process of this Docker image is **triggered automatically every month** (thanks, [GitHub Actions](https://github.com/features/actions)! :smile:) to ensure that you get it with all the latest updated packages. See the [workflow file](.github/workflows/release.yml) for further information.
-
-## Usage
+## Simple usage
 
 The simplest way to try this image is:
 
@@ -19,57 +17,14 @@ The simplest way to try this image is:
 docker run -it --rm -p 6901:6901 dmotte/desktainer-rootless
 ```
 
-But this way the container will run as root. To run it as a non-root user, this image has to be extended. Take a look at [`test/Dockerfile`](test/Dockerfile) for an example.
-
-So the simplest **sensible** way to try this image is:
-
-```bash
-docker build -t dtrl-test test
-docker run -it --rm -p 6901:6901 -u mainuser dtrl-test
-```
-
 Then head over to http://localhost:6901/ to access the remote desktop.
 
 ![Screenshot](screen-01.png)
 
-You can also use more advanced commands like this one:
+However, this way the container will run as root. To run it as a non-root user, this image has to be **extended**. Take a look at the [`example`](example) folder.
 
-```bash
-docker run -it --rm -p 6901:6901 -h dtrl-test -u mainuser \
-    -v /etc/timezone:/etc/timezone:ro \
-    -v /etc/localtime:/etc/localtime:ro \
-    dtrl-test
-```
+## More info
 
-> :bulb: **Tip**: If you want to **change the resolution** while the container is running, you can use the `xrandr --fb 1024x768` command. The new resolution cannot be larger than the one specified in the `RESOLUTION` environment variable though.
+For more info see the [dmotte/desktainer](https://github.com/dmotte/desktainer) project, which is very similar to this one.
 
-### Run commands at container startup
-
-If you need to run commands at container startup, you can create Bash scripts in the following locations:
-
-- `/opt/startup-early/*.sh`: these scripts will be included in alphabetical order **before** the main container initialization process
-- `/opt/startup-late/*.sh`: these scripts will be included in alphabetical order **after** the main container initialization process
-
-See the [`startup.sh`](build/startup.sh) script for more details.
-
-Moreover, if you need to run commands after the LXDE startup, you can create launcher files in the `/etc/xdg/autostart` or the `~/.config/autostart` directory.
-
-### Environment variables
-
-Same as the [dmotte/desktainer](https://github.com/dmotte/desktainer) project except that the `USER` and `PASSWORD` environment variables have no effect. This behaviour is intended, since the container should run as a non-root user.
-
-## Development
-
-If you want to contribute to this project, the first thing you have to do is to **clone this repository** on your local machine:
-
-```bash
-git clone https://github.com/dmotte/desktainer-rootless.git
-```
-
-Then you'll have to build the **base image**:
-
-```bash
-docker build -t dmotte/desktainer-rootless build
-```
-
-And then just refer to the [Usage](#usage) section for the next steps.
+The environment variables are the same, except `USER` and `PASSWORD` which have no effect. This behaviour is intended, since this image should run as a non-root user.

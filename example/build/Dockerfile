@@ -10,6 +10,3 @@ RUN useradd \
 ENV USER=mainuser HOME=/home/mainuser
 
 WORKDIR /home/mainuser
-
-ENV RESOLUTION=1920x1080
-ENV VNC_PASSWORD=mainuser
