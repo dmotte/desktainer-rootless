@@ -4,9 +4,9 @@ set -e
 
 ############################ ENVIRONMENT VARIABLES #############################
 
-VNC_PORT=${VNC_PORT:-5901}
-NOVNC_PORT=${NOVNC_PORT:-6901}
-RESOLUTION=${RESOLUTION:-1920x1080}
+: "${VNC_PORT:=5901}"
+: "${NOVNC_PORT:=6901}"
+: "${RESOLUTION:=1920x1080}"
 
 ################### INCLUDE SCRIPTS FROM /opt/startup-early ####################
 
