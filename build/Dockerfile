@@ -14,8 +14,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the startup script
-COPY startup.sh /
-RUN chmod +x /startup.sh
+COPY --chown=root:root --chmod=755 startup.sh /
 
 # Create the /opt/startup-early and /opt/startup-late directories
 RUN mkdir -p /opt/startup-early /opt/startup-late
