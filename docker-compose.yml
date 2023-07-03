@@ -3,7 +3,7 @@ version: "3"
 
 services:
   desktainer-rootless:
-    image: dmotte/desktainer-rootless
+    image: docker.io/dmotte/desktainer-rootless:latest
     build: build
     restart: always
     hostname: desktainer-rootless
