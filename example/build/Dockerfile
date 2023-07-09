@@ -2,11 +2,7 @@
 FROM docker.io/dmotte/desktainer-rootless:latest
 
 # Create custom user named "mainuser"
-RUN useradd \
-    --create-home \
-    --shell /bin/bash \
-    --user-group \
-    mainuser
+RUN useradd -Ums/bin/bash mainuser
 
 ENV USER=mainuser HOME=/home/mainuser
 
