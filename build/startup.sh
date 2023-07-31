@@ -18,15 +18,13 @@ done
 
 ############################# VNC SERVER PASSWORD ##############################
 
-# If the VNC password should be set
 if [ -n "$VNC_PASSWORD" ]; then
-    # If the .vnc/passwd file doesn't exist
     if [ ! -f "$HOME/.vnc/passwd" ]; then
         echo "Storing the VNC password into $HOME/.vnc/passwd"
 
         mkdir -p "$HOME/.vnc"
 
-        # Store the password (encrypted and with 400 permissions)
+        # Store the password encrypted and with 400 permissions
         x11vnc -storepasswd "$VNC_PASSWORD" "$HOME/.vnc/passwd"
         chmod 400 "$HOME/.vnc/passwd"
     fi
@@ -42,7 +40,6 @@ fi
 
 ############################# CLEAR Xvfb LOCK FILE #############################
 
-# Remove the X11 lock file if present
 rm -f /tmp/.X0-lock
 
 #################### INCLUDE SCRIPTS FROM /opt/startup-late ####################
