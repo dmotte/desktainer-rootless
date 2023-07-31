@@ -9,8 +9,8 @@ services:
     hostname: dtrl01
     user: mainuser
     ports:
-      - "5901:5901" # VNC
-      - "6901:6901" # noVNC
+      - "5901:5901"
+      - "6901:6901"
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
