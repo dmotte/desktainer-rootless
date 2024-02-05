@@ -31,11 +31,11 @@ if [ -n "$VNC_PASSWORD" ]; then
 
     unset VNC_PASSWORD
 
-    VNCPWOPTION="-usepw"
-    echo "VNC password set"
+    VNCPWOPTION=-usepw
+    echo 'VNC password set'
 else
-    VNCPWOPTION="-nopw"
-    echo "VNC password disabled"
+    VNCPWOPTION=-nopw
+    echo 'VNC password disabled'
 fi
 
 ############################# CLEAR Xvfb LOCK FILE #############################
@@ -54,20 +54,20 @@ done
 
 trap 'kill $(jobs -p)' EXIT
 
-echo "Starting Xvfb"
+echo 'Starting Xvfb'
 /usr/bin/Xvfb :0 -screen 0 "${RESOLUTION}x24" -nolisten tcp -nolisten unix &
 sleep 2
 
-echo "Starting LXDE"
+echo 'Starting LXDE'
 DISPLAY=:0 /usr/bin/startlxde &
 sleep 2
 
-echo "Starting x11vnc"
+echo 'Starting x11vnc'
 /usr/bin/x11vnc -display :0 -xkb -forever -shared -repeat -capslock \
     -rfbport "$VNC_PORT" "$VNCPWOPTION" &
 sleep 2
 
-echo "Starting noVNC"
+echo 'Starting noVNC'
 /usr/bin/websockify --web=/usr/share/novnc "$NOVNC_PORT" "127.0.0.1:$VNC_PORT" &
 
 wait # until all jobs finish
