@@ -45,8 +45,10 @@ RUN arch=$(uname -m); \
     rm /etc/xdg/autostart/lxpolkit.desktop && \
     mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
 
-ENV USER=root HOME=/root
+RUN useradd -Ums/bin/bash mainuser
 
-WORKDIR /root
+USER mainuser
+ENV USER=mainuser HOME=/home/mainuser
+WORKDIR /home/mainuser
 
 ENTRYPOINT ["/startup.sh"]
