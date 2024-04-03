@@ -27,6 +27,8 @@ For a more complex example, refer to the [`docker-compose.yml`](docker-compose.y
 
 You can also **extend** this image to create your own custom unprivileged user, and then leverage the `--user` Docker option to run the container as such.
 
+> **Note**: even if the container is running as an unprivileged user, you can still use `docker exec -ituroot bash` to run commands as root inside it.
+
 ## More info
 
 For more info see the [dmotte/desktainer](https://github.com/dmotte/desktainer) project, which is very similar to this one.
