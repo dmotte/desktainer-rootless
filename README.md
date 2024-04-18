@@ -14,7 +14,7 @@
 The simplest way to try this image is:
 
 ```bash
-docker run -it --rm -p 6901:6901 dmotte/desktainer-rootless
+docker run -it --rm -p6901:6901 dmotte/desktainer-rootless
 ```
 
 > **Note**: since some GUI applications may have issues with Docker's default _seccomp_ profile, you may need to use `--security-opt seccomp=unconfined`
