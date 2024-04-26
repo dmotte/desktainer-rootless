@@ -33,4 +33,4 @@ You can also **extend** this image to create your own custom unprivileged user, 
 
 For more info see the [dmotte/desktainer](https://github.com/dmotte/desktainer) project, which is very similar to this one.
 
-The environment variables are the same, except `USER` and `PASSWORD` which have no effect. This behaviour is intended, since this runs as a non-root user.
+The environment variables are the same, except `MAINUSER_NAME` and `MAINUSER_PASS` which have no effect. This behaviour is intended, since this runs as a non-root user.

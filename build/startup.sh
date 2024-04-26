@@ -2,11 +2,17 @@
 
 set -e
 
-############################ ENVIRONMENT VARIABLES #############################
+################################## VARIABLES ###################################
 
-: "${VNC_PORT:=5901}"
-: "${NOVNC_PORT:=6901}"
-: "${RESOLUTION:=1920x1080}"
+# Ensure that the HOME environment variable is defined
+: "${HOME:?}"
+
+resolution=${RESOLUTION:-1920x1080}
+
+vnc_pass=${VNC_PASS:-}
+unset VNC_PASS
+vnc_port=${VNC_PORT:-5901}
+novnc_port=${NOVNC_PORT:-6901}
 
 ################### INCLUDE SCRIPTS FROM /opt/startup-early ####################
 
@@ -18,24 +24,22 @@ done
 
 ############################# VNC SERVER PASSWORD ##############################
 
-if [ -n "$VNC_PASSWORD" ]; then
+if [ -n "$vnc_pass" ]; then
     if [ ! -f "$HOME/.vnc/passwd" ]; then
         echo "Storing the VNC password into $HOME/.vnc/passwd"
 
         mkdir -p "$HOME/.vnc"
 
         # Store the password encrypted and with 400 permissions
-        x11vnc -storepasswd "$VNC_PASSWORD" "$HOME/.vnc/passwd"
+        x11vnc -storepasswd "$vnc_pass" "$HOME/.vnc/passwd"
         chmod 400 "$HOME/.vnc/passwd"
     fi
 
-    unset VNC_PASSWORD
-
-    VNCPWOPTION=-usepw
-    echo 'VNC password set'
+    echo 'VNC password will be enabled'
+    vncpwoption=-usepw
 else
-    VNCPWOPTION=-nopw
-    echo 'VNC password disabled'
+    echo 'VNC password will be disabled'
+    vncpwoption=-nopw
 fi
 
 ############################# CLEAR Xvfb LOCK FILE #############################
@@ -55,7 +59,7 @@ done
 trap 'kill $(jobs -p)' EXIT
 
 echo 'Starting Xvfb'
-/usr/bin/Xvfb :0 -screen 0 "${RESOLUTION}x24" -nolisten tcp -nolisten unix &
+/usr/bin/Xvfb :0 -screen 0 "${resolution}x24" -nolisten tcp -nolisten unix &
 sleep 2
 
 echo 'Starting LXDE'
@@ -64,11 +68,11 @@ sleep 2
 
 echo 'Starting x11vnc'
 /usr/bin/x11vnc -display :0 -xkb -forever -shared -repeat -capslock \
-    -rfbport "$VNC_PORT" "$VNCPWOPTION" &
+    -rfbport "$vnc_port" "$vncpwoption" &
 sleep 2
 
 echo 'Starting noVNC'
-/usr/bin/websockify --web=/usr/share/novnc "$NOVNC_PORT" "127.0.0.1:$VNC_PORT" &
+/usr/bin/websockify --web=/usr/share/novnc "$novnc_port" "127.0.0.1:$vnc_port" &
 
 wait # until all jobs finish
 trap - EXIT
