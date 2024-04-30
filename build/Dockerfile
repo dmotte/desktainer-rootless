@@ -13,7 +13,7 @@ RUN apt-get update && \
 
 COPY --chown=root:root --chmod=755 startup.sh /
 
-RUN mkdir -p /opt/startup-early /opt/startup-late
+RUN install -dm700 /opt/startup-early /opt/startup-late
 
 ENV LC_ALL C.UTF-8
 RUN echo '#!/bin/bash\n\nexport LC_ALL=C.UTF-8' \
