@@ -13,8 +13,6 @@ RUN apt-get update && \
 
 COPY --chown=root:root --chmod=755 startup.sh /
 
-RUN install -dm700 /opt/startup-early /opt/startup-late
-
 ENV LC_ALL C.UTF-8
 RUN echo '#!/bin/bash\n\nexport LC_ALL=C.UTF-8' \
     > /etc/profile.d/set-c-utf8-locale.sh
@@ -45,7 +43,8 @@ RUN arch=$(uname -m); \
     rm /etc/xdg/autostart/lxpolkit.desktop && \
     mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
 
-RUN useradd -Ums/bin/bash mainuser
+RUN useradd -Ums/bin/bash mainuser && \
+    install -d -omainuser -gmainuser -m700 /opt/startup-early /opt/startup-late
 
 USER mainuser
 ENV USER=mainuser HOME=/home/mainuser
