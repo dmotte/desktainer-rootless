@@ -2,7 +2,7 @@
 
 set -e
 
-################################## VARIABLES ###################################
+########################### VARIABLES AND FUNCTIONS ############################
 
 # Ensure that the HOME environment variable is defined
 : "${HOME:?}"
@@ -13,6 +13,8 @@ vnc_pass=${VNC_PASS:-}
 unset VNC_PASS
 vnc_port=${VNC_PORT:-5901}
 novnc_port=${NOVNC_PORT:-6901}
+
+withprefix() { while read -r i; do echo "$1$i"; done }
 
 ################### INCLUDE SCRIPTS FROM /opt/startup-early ####################
 
@@ -59,20 +61,22 @@ done
 trap 'kill $(jobs -p)' EXIT
 
 echo 'Starting Xvfb'
-/usr/bin/Xvfb :0 -screen 0 "${resolution}x24" -nolisten tcp -nolisten unix &
+/usr/bin/Xvfb :0 -screen 0 "${resolution}x24" -nolisten tcp \
+    -nolisten unix 2>&1 | withprefix 'Xvfb: ' &
 sleep 2
 
 echo 'Starting LXDE'
-DISPLAY=:0 /usr/bin/startlxde &
+DISPLAY=:0 /usr/bin/startlxde 2>&1 | withprefix 'LXDE: ' &
 sleep 2
 
 echo 'Starting x11vnc'
 /usr/bin/x11vnc -display :0 -xkb -forever -shared -repeat -capslock \
-    -rfbport "$vnc_port" "$vncpwoption" &
+    -rfbport "$vnc_port" "$vncpwoption" 2>&1 | withprefix 'x11vnc: ' &
 sleep 2
 
 echo 'Starting noVNC'
-/usr/bin/websockify --web=/usr/share/novnc "$novnc_port" "127.0.0.1:$vnc_port" &
+/usr/bin/websockify --web=/usr/share/novnc "$novnc_port" \
+    "127.0.0.1:$vnc_port" 2>&1 | withprefix 'noVNC: ' &
 
 wait # until all jobs finish
 trap - EXIT
