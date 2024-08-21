@@ -31,7 +31,7 @@ RUN arch=$(uname -m); \
         /usr/share/novnc/core/rfb.js; \
     fi && \
     \
-    mv /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
+    mv -T /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
     \
     sed -i "s/\(WebUtil\.getConfigVar[(]'autoconnect', \)false/\1true/" \
     /usr/share/novnc/app/ui.js && \
@@ -41,7 +41,7 @@ RUN arch=$(uname -m); \
     rm /etc/xdg/autostart/light-locker.desktop && \
     \
     rm /etc/xdg/autostart/lxpolkit.desktop && \
-    mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
+    mv -T /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
 
 RUN useradd -Ums/bin/bash mainuser && \
     install -d -omainuser -gmainuser -m700 /opt/startup-early /opt/startup-late
