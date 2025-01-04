@@ -7,12 +7,12 @@ set -e
 # Ensure that the HOME environment variable is defined
 : "${HOME:?}"
 
-resolution=${RESOLUTION:-1920x1080}
+readonly resolution=${RESOLUTION:-1920x1080}
 
-vnc_pass=${VNC_PASS:-}
+readonly vnc_pass=${VNC_PASS:-}
 unset VNC_PASS
-vnc_port=${VNC_PORT:-5901}
-novnc_port=${NOVNC_PORT:-6901}
+readonly vnc_port=${VNC_PORT:-5901}
+readonly novnc_port=${NOVNC_PORT:-6901}
 
 withprefix() { while read -r i; do echo "$1$i"; done }
 
