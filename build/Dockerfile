@@ -44,7 +44,7 @@ RUN arch=$(uname -m); \
     mv -T /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
 
 RUN useradd -Ums/bin/bash mainuser && \
-    install -d -omainuser -gmainuser -m700 /opt/startup-early /opt/startup-late
+    install -omainuser -gmainuser -dm700 /opt/startup-early /opt/startup-late
 
 USER mainuser
 ENV USER=mainuser HOME=/home/mainuser
