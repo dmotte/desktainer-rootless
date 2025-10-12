@@ -31,20 +31,20 @@ RUN arch=$(uname -m); \
         /usr/share/novnc/core/rfb.js; \
     fi && \
     \
-    mv -T /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
+    mv -Tv /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
     \
     sed -i "s/\(WebUtil\.getConfigVar[(]'autoconnect', \)false/\1true/" \
     /usr/share/novnc/app/ui.js && \
     \
     update-alternatives --set x-terminal-emulator /usr/bin/lxterminal && \
     \
-    rm /etc/xdg/autostart/light-locker.desktop && \
+    rm -v /etc/xdg/autostart/light-locker.desktop && \
     \
-    rm /etc/xdg/autostart/lxpolkit.desktop && \
-    mv -T /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
+    rm -v /etc/xdg/autostart/lxpolkit.desktop && \
+    mv -Tv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
 
 RUN useradd -Ums/bin/bash mainuser && \
-    install -omainuser -gmainuser -dm700 /opt/startup-early /opt/startup-late
+    install -omainuser -gmainuser -dvm700 /opt/startup-early /opt/startup-late
 
 USER mainuser
 ENV USER=mainuser HOME=/home/mainuser
