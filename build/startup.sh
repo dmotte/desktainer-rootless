@@ -58,7 +58,7 @@ done
 
 ################################ START SERVICES ################################
 
-trap 'kill $(jobs -p)' EXIT
+trap 'jobs -p | xargs -rd\\n kill; wait' EXIT
 
 echo 'Starting Xvfb'
 /usr/bin/Xvfb :0 -screen 0 "${resolution}x24" -nolisten tcp \
