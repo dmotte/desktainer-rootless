@@ -50,4 +50,4 @@ USER mainuser
 ENV USER=mainuser HOME=/home/mainuser
 WORKDIR /home/mainuser
 
-ENTRYPOINT ["/startup.sh"]
+ENTRYPOINT ["/bin/bash", "/startup.sh"]
