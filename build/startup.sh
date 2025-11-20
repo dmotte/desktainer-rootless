@@ -14,7 +14,7 @@ unset VNC_PASS
 readonly vnc_port=${VNC_PORT:-5901}
 readonly novnc_port=${NOVNC_PORT:-6901}
 
-withprefix() { while read -r i; do echo "$1$i"; done }
+withprefix() { while IFS= read -r i; do echo "$1$i"; done }
 
 ################### INCLUDE SCRIPTS FROM /opt/startup-early ####################
 
