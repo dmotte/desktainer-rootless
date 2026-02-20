@@ -7,7 +7,7 @@
 
 :computer: Remote **desk**top in a con**tainer** (rootless version). This image is almost equivalent to [dmotte/desktainer](https://github.com/dmotte/desktainer) but it runs as a **non-root user**.
 
-> :package: This image is also on **Docker Hub** as [`dmotte/desktainer-rootless`](https://hub.docker.com/r/dmotte/desktainer-rootless) and runs on **several architectures** (e.g. amd64, arm64, ...). To see the full list of supported platforms, please refer to the [`.github/workflows/main.yml`](.github/workflows/main.yml) file. If you need an architecture which is currently unsupported, feel free to open an issue.
+> :package: This image is also on **Docker Hub** as [`dmotte/desktainer-rootless`](https://hub.docker.com/r/dmotte/desktainer-rootless) and runs on **several architectures** (e.g. amd64, arm64, ...). To see the full list of supported platforms, please refer to the [`.github/workflows/main.yml`](.github/workflows/main.yml) file. If you need an architecture that is currently unsupported, feel free to open an issue.
 
 ## Simple usage
 
